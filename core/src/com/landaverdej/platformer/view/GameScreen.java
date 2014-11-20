@@ -16,17 +16,19 @@ public class GameScreen implements Screen {
     map = new TmxMapLoader().load("map/level.01.tmx");
         //set the renderer
     renderer = new OrthogonalTiledMapRenderer(map,1/70f );
-        // set yhe camera
+        // set yhe camera to 14f 14f
         camera = new OrthographicCamera(14f, 14f);
+        // setting the cameras position so it displays on the center of the game
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
     }
 
     @Override
     public void render(float delta) {
         // update the cameras position
         camera.update();
-        //renderer set camera view to 14f 14f
+        //renderer set camera view
         renderer.setView(camera);
-        //renderer to render
+        //renderer to render to show map
         renderer.render();
     }
 
