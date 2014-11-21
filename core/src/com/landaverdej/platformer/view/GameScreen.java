@@ -1,5 +1,6 @@
 package com.landaverdej.platformer.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -16,10 +17,14 @@ public class GameScreen implements Screen {
     map = new TmxMapLoader().load("map/level.01.tmx");
         //set the renderer
     renderer = new OrthogonalTiledMapRenderer(map,1/70f );
+      // setting a new width and height variable to fix the size of the game screen
+        float width = Gdx.graphics.getWidth();
+        float height = Gdx.graphics.getHeight();
         // set yhe camera to 14f 14f
-        camera = new OrthographicCamera(14f, 14f);
+        camera = new OrthographicCamera(14f, 14f * (height/width));
         // setting the cameras position so it displays on the center of the game
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
+
     }
 
     @Override
