@@ -2,6 +2,7 @@ package com.landaverdej.platformer.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -29,6 +30,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        //seting the color of the clear
+       Gdx.gl.glClearColor(0.03f, 0.02f, 0.05f, 1f);
+        //clear color buffer using our own color
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // update the cameras position
         camera.update();
         //renderer set camera view
@@ -39,7 +44,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+       //sets new hieght and width on game screen
+        camera.viewportWidth =14f;
+        camera.viewportHeight = 14f * height / width;
+        //update the new camera position
+        camera.update();
     }
 
     @Override
