@@ -4,14 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.landaverdej.platformer.model.Player;
 
 public class GameScreen implements Screen {
    public TiledMap map;
    public OrthogonalTiledMapRenderer renderer;
    public OrthographicCamera camera;
+public SpriteBatch spriteBatch;
+    public Player player;
 
     public GameScreen() {
         //loaded the map from assets
@@ -25,6 +29,10 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera(14f, 14f * (height/width));
         // setting the cameras position so it displays on the center of the game
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
+        //create a new spritebatch
+        spriteBatch = new SpriteBatch();
+       //create a new player
+        player= new Player();
 
     }
 
@@ -40,6 +48,12 @@ public class GameScreen implements Screen {
         renderer.setView(camera);
         //renderer to render to show map
         renderer.render();
+        //starting a new spritebatch
+        spriteBatch.begin();
+        //drawing the player using spritebatch
+       player.draw(spriteBatch);
+        //ending spritebatch
+        spriteBatch.end();
     }
 
     @Override
