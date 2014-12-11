@@ -23,6 +23,7 @@ public class Player {
         position = new Vector2(0,1);
         width= 70;
         height= 100;
+       //setting the hard coded numbers in to variables
         spritesheet= new SpriteSheet("img/aliens.png",width,height);
         //storing the animation in animation
         animation = spritesheet.createAnimatiom();
