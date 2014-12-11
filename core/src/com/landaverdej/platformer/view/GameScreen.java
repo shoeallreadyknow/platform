@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -14,7 +15,7 @@ public class GameScreen implements Screen {
    public TiledMap map;
    public OrthogonalTiledMapRenderer renderer;
    public OrthographicCamera camera;
-public SpriteBatch spriteBatch;
+public Batch spriteBatch;
     public Player player;
 
     public GameScreen() {
@@ -30,7 +31,7 @@ public SpriteBatch spriteBatch;
         // setting the cameras position so it displays on the center of the game
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
         //create a new spritebatch
-        spriteBatch = new SpriteBatch();
+        spriteBatch = renderer.getSpriteBatch();
        //create a new player
         player= new Player();
 
@@ -54,6 +55,9 @@ public SpriteBatch spriteBatch;
        player.draw(spriteBatch);
         //ending spritebatch
         spriteBatch.end();
+        //updating player position
+        player.update(delta);
+
     }
 
     @Override
