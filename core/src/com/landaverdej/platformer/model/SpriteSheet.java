@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class SpriteSheet {
     public Texture spriteSheet;
     public TextureRegion[] spriteFrames;
-    public Animation animation;
+
 
     public SpriteSheet(String pathtofile, int width, int hieght) {
         // setting a new texture sprite sheet
@@ -39,15 +39,21 @@ public class SpriteSheet {
         }
 
     }
-    public Animation createAnimatiom(){
+    public Animation createAnimatiom(int startFrame, int lastframe, float animationSpeed){
+       //finding out the amount of frames needed to be used
+        int counter= (lastframe +1 ) - startFrame;
         //saving 2 spaces in tecture region
-        TextureRegion[] animationFrames = new TextureRegion[2];
-        //acessing the player animation frame
-        animationFrames[0]= spriteFrames[12];
-        //acessing the player animation frame
-        animationFrames[1] = spriteFrames[13];
+        TextureRegion[] animationFrames = new TextureRegion[counter];
+
+        for(int index= lastframe; index>=startFrame;index--){
+
+            animationFrames[--counter]= spriteFrames[index];
+
+
+        }
+
         //setting how fast the animation is
-        animation = new Animation(0.07f, animationFrames);
-    return animation;
+    return new Animation(animationSpeed, animationFrames);
+
     }
 }
