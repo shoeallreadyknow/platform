@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.landaverdej.platformer.model.Player;
 
 public class GameScreen implements Screen {
@@ -17,12 +20,18 @@ public class GameScreen implements Screen {
    public OrthographicCamera camera;
 public Batch spriteBatch;
     public Player player;
+    public static World gameWorld;
+    private Box2DDebugRenderer debugRenderer;
 
     public GameScreen() {
         //loaded the map from assets
     map = new TmxMapLoader().load("map/level.01.tmx");
         //set the renderer
     renderer = new OrthogonalTiledMapRenderer(map,1/70f );
+
+        gameWorld = new World(new Vector2(0,-10), true);
+        debugRenderer = new Box2DDebugRenderer();
+
       // setting a new width and height variable to fix the size of the game screen
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
@@ -34,6 +43,7 @@ public Batch spriteBatch;
         spriteBatch = renderer.getSpriteBatch();
        //create a new player
         player= new Player();
+
 
     }
 
@@ -55,8 +65,11 @@ public Batch spriteBatch;
        player.draw(spriteBatch);
         //ending spritebatch
         spriteBatch.end();
+        debugRenderer.render(gameWorld, camera.combined);
         //updating player position
         player.update(delta);
+
+
 
     }
 
