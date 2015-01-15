@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.landaverdej.platformer.controller.LevelController;
 import com.landaverdej.platformer.view.GameScreen;
 
 import java.util.HashMap;
@@ -20,18 +21,19 @@ public class Player {
     //creates a variable for spriteSheets
     public Spritesheet spriteSheet;
 
-    public int width;
-    public int height;
+    public float width;
+    public float height;
     private float stateTime;
     private HashMap<String, Animation> animations;
     public String currentAnimation;
 
-    public Player() {
+    public Player( int width, int height ) {
         //positions the character
-        position = new Vector2(14,5);
+        position = new Vector2(3,5);
         animations = new HashMap<String, Animation>();
-        width = 70;
-        height = 100;
+        this.width = width * LevelController.UNIT_SCALE;
+        this.height = height * LevelController.UNIT_SCALE;
+
         spriteSheet = new Spritesheet("img/aliens.png", width , height);
         animations.put("walk", spriteSheet.createAnimation(20, 21, 0.1f));
         animations.put("walkLeft", spriteSheet.flipAnimation(animations.get("walk"), true, false));
@@ -63,11 +65,11 @@ public class Player {
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
         bodyDefinition.position.set(position);
         // creating our body
-        Body playerBody = GameScreen.gameWorld.createBody(bodyDefinition);
+        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
         playerBody.setUserData(this);
         //geting the shape
         PolygonShape rectangleShape = new PolygonShape();
-        rectangleShape.setAsBox(width /2f, height /2f, new Vector2(width /2f, height / 2f), 0f );
+        rectangleShape.setAsBox(this.width /2, this.height /2, new Vector2(this.width/2f, this.height/ 2f), 0f );
        //setting the shsape to fix def
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
@@ -78,7 +80,7 @@ public class Player {
 
     public void draw(Batch spriteBatch) {
         //draws the SpriteSheet onto the game
-        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width * (1/70f), height * (1/70f));
+        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width , height );
 
 
 
