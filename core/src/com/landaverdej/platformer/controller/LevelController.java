@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.landaverdej.platformer.model.Level;
 import com.landaverdej.platformer.model.Player;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
+import com.landaverdej.platformer.model.sprite;
 
 
 public class LevelController {
@@ -48,14 +48,23 @@ public class LevelController {
         debugRenderer.render(gameWorld, CameraController.camera.combined);
     }
 
-    public static void update() {
+    public static void update(float deltaTime) {
         //renderer set camera view
         renderer.setView(CameraController.camera);
         //renderer to render to show map
         renderer.render();
+        PlayerController.update(deltaTime);
+        updateworldbodies();
         gameWorld.step(1/60f,1, 1);
     }
     private static void updateworldbodies(){
         worldbodies.clear();
+        gameWorld.getBodies(worldbodies);
+        for(Body body : worldbodies){
+            sprite playerBody = (sprite)body.getUserData();
+
+            playerBody.position = body.getPosition();
+
+        }
     }
 }

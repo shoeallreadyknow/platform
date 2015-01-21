@@ -15,26 +15,29 @@ import com.landaverdej.platformer.view.GameScreen;
 
 import java.util.HashMap;
 
-public class Player {
-    //creates a variable for positions
-    public Vector2 position;
-    //creates a variable for spriteSheets
-    public Spritesheet spriteSheet;
+public class Player extends sprite {
 
-    public float width;
-    public float height;
-    private float stateTime;
-    private HashMap<String, Animation> animations;
-    public String currentAnimation;
 
-    public Player( int width, int height ) {
-        //positions the character
-        position = new Vector2(3,5);
-        animations = new HashMap<String, Animation>();
-        this.width = width * LevelController.UNIT_SCALE;
-        this.height = height * LevelController.UNIT_SCALE;
+    public Player(Vector2 position, int width, int height ) {
+            super(position, width, height);
 
-        spriteSheet = new Spritesheet("img/aliens.png", width , height);
+        //seting properties for our riddged body
+        BodyDef bodyDefinition = new BodyDef();
+        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
+        bodyDefinition.position.set(position);
+        // creating our body
+        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
+        playerBody.setUserData(this);
+        //geting the shape
+        PolygonShape rectangleShape = new PolygonShape();
+        rectangleShape.setAsBox(this.width /2, this.height /2, new Vector2(this.width/2f, this.height/ 2f), 0f );
+        //setting the shsape to fix def
+        FixtureDef fixtureDefinition = new FixtureDef();
+        fixtureDefinition.shape = rectangleShape;
+        //created the fixture
+        playerBody.createFixture(fixtureDefinition);
+        rectangleShape.dispose();
+
         animations.put("walk", spriteSheet.createAnimation(20, 21, 0.1f));
         animations.put("walkLeft", spriteSheet.flipAnimation(animations.get("walk"), true, false));
 
@@ -58,38 +61,16 @@ public class Player {
         animations.put("climb",spriteSheet.createAnimation(12, 13, 0.1f));
 
 
-        currentAnimation = "walkLeft";
-        stateTime = 0f;
-        //seting properties for our riddged body
-        BodyDef bodyDefinition = new BodyDef();
-        bodyDefinition.type = BodyDef.BodyType.DynamicBody;
-        bodyDefinition.position.set(position);
-        // creating our body
-        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
-        playerBody.setUserData(this);
-        //geting the shape
-        PolygonShape rectangleShape = new PolygonShape();
-        rectangleShape.setAsBox(this.width /2, this.height /2, new Vector2(this.width/2f, this.height/ 2f), 0f );
-       //setting the shsape to fix def
-        FixtureDef fixtureDefinition = new FixtureDef();
-        fixtureDefinition.shape = rectangleShape;
-        //created the fixture
-        playerBody.createFixture(fixtureDefinition);
-        rectangleShape.dispose();
+        currentAnimation = "walk";
+
+
     }
 
     public void draw(Batch spriteBatch) {
-        //draws the SpriteSheet onto the game
-        spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime, true), position.x, position.y, width , height );
-
-
-
+       super.draw(spriteBatch);
     }
 
-    public void update(float deltaTime)
-    {
-        //animates the character in a direction
-        stateTime += deltaTime;
-
+    public void update(float deltaTime){
+       super.update(deltaTime);
     }
 }

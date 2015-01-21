@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
         CameraController.update();
 
         //updating level controller
-        LevelController.update();
+        LevelController.update(delta);
         PlayerController.update(delta);
         //draing level controller
         LevelController.draw();
