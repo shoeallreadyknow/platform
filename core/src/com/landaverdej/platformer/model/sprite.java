@@ -4,11 +4,13 @@ package com.landaverdej.platformer.model;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.landaverdej.platformer.controller.LevelController;
 
 import java.util.HashMap;
 
 public class sprite {
+    public Body physicsbody;
     //creates a variable for positions
     public Vector2 position;
     //creates a variable for spriteSheets

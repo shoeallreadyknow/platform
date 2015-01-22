@@ -32,7 +32,7 @@ public class LevelController {
         //set the renderer
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
         spriteBatch = renderer.getSpriteBatch();
-        gameWorld = new World(new Vector2(0, -10), true);
+        gameWorld = new World(new Vector2(0,0), true);
 
         worldbodies= new Array<Body>();
 
@@ -42,7 +42,7 @@ public class LevelController {
     public static void draw() {
         //starting a new spritebatch
         spriteBatch.begin();
-        PlayerController.player.draw(spriteBatch);
+        PlayerController.draw(spriteBatch);
         //ending spritebatch
         spriteBatch.end();
         debugRenderer.render(gameWorld, CameraController.camera.combined);
@@ -61,10 +61,10 @@ public class LevelController {
         worldbodies.clear();
         gameWorld.getBodies(worldbodies);
         for(Body body : worldbodies){
-            sprite playerBody = (sprite)body.getUserData();
-
-            playerBody.position = body.getPosition();
-
+            sprite spriteBody = (sprite)body.getUserData();
+            if(spriteBody != null) {
+                spriteBody.position = body.getPosition();
+           }
         }
     }
 }
