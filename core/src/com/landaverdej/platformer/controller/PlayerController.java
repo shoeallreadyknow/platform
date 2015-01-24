@@ -10,6 +10,8 @@ import com.landaverdej.platformer.model.Player;
 
 public class PlayerController {
     public static Player player;
+    private static final float VELOCITY = 1f;
+    private static final float MAX_VELOCITY =5f;
 
     public static void initializeController(){
         //create a new players
@@ -17,6 +19,8 @@ public class PlayerController {
     }
 
     public static void update(float deltaTime) {
+        //updating the handle input so player can move
+        handleinput();
         //updating player position
         player.update(deltaTime);
     }
@@ -31,10 +35,13 @@ public class PlayerController {
         //setting the position
         Vector2 position = player.physicsbody.getPosition();
 
+        if(Math.abs(velocity.x) > MAX_VELOCITY) {
+            //setting the velocity of the player
+            player.physicsbody.setLinearVelocity(velocity.x, velocity.y);
+        }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            player.physicsbody.applyLinearImpulse(velocity, 0,);
+            player.physicsbody.applyLinearImpulse(VELOCITY, 0, position.x, position.y, true);
         }
     }
 
 }
-
