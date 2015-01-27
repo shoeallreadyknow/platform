@@ -2,6 +2,8 @@ package com.landaverdej.platformer.controller;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.landaverdej.platformer.model.Bodies;
 import com.landaverdej.platformer.model.Level;
 import com.landaverdej.platformer.model.Player;
 import com.landaverdej.platformer.model.sprite;
@@ -31,12 +34,15 @@ public class LevelController {
         level = new Level("map/level.01.tmx");
         //set the renderer
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        spriteBatch = renderer.getSpriteBatch();
-        gameWorld = new World(new Vector2(0,0), true);
+        gameWorld = new World(new Vector2(0,-10), true);
 
         worldbodies= new Array<Body>();
 
         debugRenderer = new Box2DDebugRenderer();
+
+        spriteBatch = renderer.getSpriteBatch();
+        createLevelBodies();
+
     }
 
     public static void draw() {
@@ -65,6 +71,14 @@ public class LevelController {
             if(spriteBody != null) {
                 spriteBody.position = body.getPosition();
            }
+        }
+    }
+    private static void createLevelBodies(){
+        MapObjects mapObjects = level.getLayerObjects(level.getMapLayer("collision"));
+
+        for(MapObject mapObject : mapObjects){
+            Bodies.createBody(mapObject);
+
         }
     }
 }

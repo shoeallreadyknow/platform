@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.landaverdej.platformer.controller.LevelController;
 
-public class bodies {
+public class Bodies {
        public static void createBody(MapObject mapObject){
            String bodyType= mapObject.getProperties().get("type").toString();
 

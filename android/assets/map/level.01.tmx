@@ -24,15 +24,14 @@
  </layer>
  <objectgroup color="#f80606" name="collision" width="20" height="10">
   <object name="ground" type="solid" x="490" y="560" width="280" height="70"/>
-  <object x="700" y="700" width="350"/>
+  <object name="ground" type="solid" x="700" y="700" width="350"/>
   <object name="ground" type="solid" x="700" y="630" width="630" height="70"/>
   <object name="ground" type="solid" x="1260" y="560" width="140" height="70"/>
   <object name="ground" type="solid" x="0" y="140" width="210" height="70"/>
-  <object name="ground" type="solid" x="210" y="210" width="490" height="70"/>
   <object name="ground" type="solid" x="910" y="140" width="210" height="70"/>
   <object name="ground" type="solid" x="1190" y="140" width="210" height="70"/>
   <object name="ground" type="solid" x="0" y="560" width="140" height="70"/>
   <object name="ground" type="solid" x="70" y="630" width="490" height="70"/>
-  <object name="ground" type="solid" x="700" y="210" width="70" height="70"/>
+  <object name="gground" type="solid" x="210" y="210" width="560" height="70"/>
  </objectgroup>
 </map>
