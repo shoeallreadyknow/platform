@@ -11,7 +11,7 @@ import com.landaverdej.platformer.model.Player;
 public class PlayerController {
     public static Player player;
     private static final float VELOCITY = 1f;
-    private static final float MAX_VELOCITY =5f;
+    private static final float MAX_VELOCITY =3f;
 
     public static void initializeController(){
         //create a new players
@@ -41,6 +41,9 @@ public class PlayerController {
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             player.physicsbody.applyLinearImpulse(VELOCITY, 0, position.x, position.y, true);
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            player.physicsbody.applyLinearImpulse(-VELOCITY, 0, position.x, position.y, true);
         }
     }
 

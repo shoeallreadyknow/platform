@@ -29,5 +29,9 @@ public class Bodies {
                physicsbody.createFixture(fixtureDefinition);
                rectangleshape.dispose();
            }
+           else if( bodyType.equalsIgnoreCase("slope")){
+               
+
+           }
      }
 }
