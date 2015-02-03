@@ -2,6 +2,7 @@ package com.landaverdej.platformer.model;
 
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -30,8 +31,26 @@ public class Bodies {
                rectangleshape.dispose();
            }
            else if( bodyType.equalsIgnoreCase("slope")){
-               
+               PolygonMapObject polygonobject = (PolygonMapObject)mapObject;
+                BodyDef bodyDefinition = new BodyDef();
+               bodyDefinition.type = BodyDef.BodyType.StaticBody;
+               bodyDefinition.position.set(polygonobject.getPolygon().getX()* LevelController.UNIT_SCALE, polygonobject.getPolygon().getY()* LevelController.UNIT_SCALE);
 
+               Body physicsbody = LevelController.gameWorld.createBody(bodyDefinition);
+               PolygonShape slopeshape = new PolygonShape();
+
+               float[] transformedVerticies = new float[6];
+
+               for(int index = 0; index < transformedVerticies.length; index++){
+                   transformedVerticies[index] = polygonobject.getPolygon().getVertices()[index] * LevelController.UNIT_SCALE;
+               }
+
+               slopeshape.set(transformedVerticies);
+               FixtureDef fixtureDefinition = new FixtureDef();
+               fixtureDefinition.shape = slopeshape;
+
+               physicsbody.createFixture(fixtureDefinition);
+               slopeshape.dispose();
            }
      }
 }
