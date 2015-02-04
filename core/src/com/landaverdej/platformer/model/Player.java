@@ -18,8 +18,8 @@ import java.util.HashMap;
 public class Player extends sprite {
 
 
-    public Player(Vector2 position, int width, int height ) {
-            super(position, width, height);
+    public Player(Vector2 position, int width, int height, String sheetpath ) {
+            super(position, width, height, sheetpath);
 
         //seting properties for our riddged body
         BodyDef bodyDefinition = new BodyDef();

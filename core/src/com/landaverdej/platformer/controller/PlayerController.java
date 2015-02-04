@@ -15,7 +15,7 @@ public class PlayerController {
 
     public static void initializeController(){
         //create a new players
-        player= new Player(new Vector2(3,5),70,100);
+        player= new Player(new Vector2(3,5),70,100, "img/aliens.png");
     }
 
     public static void update(float deltaTime) {
@@ -37,6 +37,8 @@ public class PlayerController {
 
         if(Math.abs(velocity.x) > MAX_VELOCITY) {
             //setting the velocity of the player
+            velocity.x = Math.signum(velocity.x) * MAX_VELOCITY;
+
             player.physicsbody.setLinearVelocity(velocity.x, velocity.y);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){

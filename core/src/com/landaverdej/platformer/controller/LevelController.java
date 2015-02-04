@@ -68,10 +68,10 @@ public class LevelController {
         gameWorld.getBodies(worldbodies);
         for(Body body : worldbodies){
             sprite spriteBody = (sprite)body.getUserData();
-            if(spriteBody != null) {
-                spriteBody.position = body.getPosition();
-           }
-        }
+             if(spriteBody != null) {
+                 spriteBody.position = body.getPosition();
+             }
+         }
     }
     private static void createLevelBodies(){
         MapObjects mapObjects = level.getLayerObjects(level.getMapLayer("collision"));

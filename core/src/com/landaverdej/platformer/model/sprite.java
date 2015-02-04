@@ -21,11 +21,11 @@ public class sprite {
     protected HashMap<String, Animation> animations;
     public String currentAnimation;
 
-    public sprite( Vector2 position, int width, int height){
+    public sprite( Vector2 position, int width, int height, String sheetpath){
        this.position=position;
         //positions the character
         position = new Vector2(3,5);
-        spriteSheet = new Spritesheet("img/aliens.png", width , height);
+        spriteSheet = new Spritesheet(sheetpath, width , height);
         animations = new HashMap<String, Animation>();
         this.width = width * LevelController.UNIT_SCALE;
         this.height = height * LevelController.UNIT_SCALE;
