@@ -13,8 +13,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.landaverdej.platformer.controller.CameraController;
+import com.landaverdej.platformer.controller.InputController;
 import com.landaverdej.platformer.controller.LevelController;
 import com.landaverdej.platformer.controller.PlayerController;
+import com.landaverdej.platformer.model.InputControl;
 import com.landaverdej.platformer.model.Player;
 
 public class GameScreen implements Screen {
@@ -30,6 +32,7 @@ public class GameScreen implements Screen {
         CameraController.initializeController();
         LevelController.initializeController();
         PlayerController.initializeController();
+        InputController.initializeController();
     }
 
     @Override

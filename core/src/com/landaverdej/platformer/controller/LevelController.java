@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.landaverdej.platformer.model.Bodies;
+import com.landaverdej.platformer.model.InputControl;
 import com.landaverdej.platformer.model.Level;
 import com.landaverdej.platformer.model.Player;
 import com.landaverdej.platformer.model.sprite;
@@ -51,6 +52,9 @@ public class LevelController {
         PlayerController.draw(spriteBatch);
         //ending spritebatch
         spriteBatch.end();
+
+        InputController.draw(spriteBatch);
+
         debugRenderer.render(gameWorld, CameraController.camera.combined);
     }
 
