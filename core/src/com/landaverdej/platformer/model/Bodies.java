@@ -26,7 +26,7 @@ public class Bodies {
                rectangleshape.setAsBox(rectangleMapObject.getRectangle().width * LevelController.UNIT_SCALE/2f , rectangleMapObject.getRectangle().height * LevelController.UNIT_SCALE/2f, new Vector2(rectangleMapObject.getRectangle().width * LevelController.UNIT_SCALE/2f , rectangleMapObject.getRectangle().height * LevelController.UNIT_SCALE/2f),0f );
                FixtureDef fixtureDefinition = new FixtureDef();
                fixtureDefinition.shape = rectangleshape;
-
+               fixtureDefinition.friction = 4.0f;
                physicsbody.createFixture(fixtureDefinition);
                rectangleshape.dispose();
            }
