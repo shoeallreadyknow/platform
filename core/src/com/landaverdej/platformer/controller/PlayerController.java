@@ -10,6 +10,10 @@ import com.landaverdej.platformer.model.Player;
 
 public class PlayerController {
     public static Player player;
+    public static String movementAction;
+    public static String specialAction;
+
+
     private static final float VELOCITY = 1f;
     private static final float MAX_VELOCITY =3f;
 
@@ -41,10 +45,10 @@ public class PlayerController {
 
             player.physicsbody.setLinearVelocity(velocity.x, velocity.y);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if(movementAction.equalsIgnoreCase("right")){
             player.physicsbody.applyLinearImpulse(VELOCITY, 0, position.x, position.y, true);
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        else if(movementAction.equalsIgnoreCase("left")){
             player.physicsbody.applyLinearImpulse(-VELOCITY, 0, position.x, position.y, true);
         }
     }

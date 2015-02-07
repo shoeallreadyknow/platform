@@ -31,13 +31,13 @@ public class InputController {
         return new InputAdapter(){
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-              System.out.print("Touch down");
+
                 return true;
             }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                System.out.print("Touch up");
+                
                 return true;
             }
         };
