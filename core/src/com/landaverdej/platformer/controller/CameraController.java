@@ -6,16 +6,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class CameraController {
     public static OrthographicCamera camera;
+    public static OrthographicCamera inputCamera;
 
     public static void initializeController(){
         // setting a new width and height variable to fix the size of the game screen
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
 
+
         // set yhe camera to 14f 14f
         camera = new OrthographicCamera(14f, 14f * (height/width));
-        // setting the cameras position so it displays on the center of the game
-        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
+        inputCamera = new OrthographicCamera(14f, 14f * (height/width));
+        inputCamera.position.set(inputCamera.viewportWidth./2f, inputCamera.viewportHeight/2f);
 
     }
 

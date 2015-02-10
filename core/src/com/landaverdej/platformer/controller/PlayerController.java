@@ -20,6 +20,8 @@ public class PlayerController {
     public static void initializeController(){
         //create a new players
         player= new Player(new Vector2(3,5),70,100, "img/aliens.png");
+        movementAction="";
+        specialAction="";
     }
 
     public static void update(float deltaTime) {
