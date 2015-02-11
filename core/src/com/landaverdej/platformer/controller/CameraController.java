@@ -17,11 +17,12 @@ public class CameraController {
         // set yhe camera to 14f 14f
         camera = new OrthographicCamera(14f, 14f * (height/width));
         inputCamera = new OrthographicCamera(14f, 14f * (height/width));
-        inputCamera.position.set(inputCamera.viewportWidth./2f, inputCamera.viewportHeight/2f);
-
+        inputCamera.position.set(inputCamera.viewportWidth / 2f, inputCamera.viewportHeight / 2f, 0);
+        inputCamera.update();
     }
 
     public static void update(){
+        camera.position.set(PlayerController.player.position.x, PlayerController.player.position.y, 0);
         // update the cameras position
         camera.update();
     }
@@ -32,6 +33,11 @@ public class CameraController {
         camera.viewportHeight = 14f * height / width;
         //update the new camera position
         camera.update();
+
+        inputCamera.viewportWidth= 14f;
+        inputCamera.viewportHeight= 14f * height/width;
+        inputCamera.position.set(inputCamera.viewportWidth / 2f, inputCamera.viewportHeight / 2f, 0);
+        inputCamera.update();
     }
 
 
