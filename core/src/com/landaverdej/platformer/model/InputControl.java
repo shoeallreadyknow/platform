@@ -2,7 +2,9 @@ package com.landaverdej.platformer.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.landaverdej.platformer.controller.CameraController;
 import com.landaverdej.platformer.controller.LevelController;
 
 public class InputControl {
@@ -27,4 +29,8 @@ public class InputControl {
 
     }
 
+    public Rectangle getBoundingBox(){
+        return new Rectangle(position.x/LevelController.UNIT_SCALE* CameraController.widthScale,
+                position.y/LevelController.UNIT_SCALE * CameraController.heightScale, width, height);
+    }
 }
