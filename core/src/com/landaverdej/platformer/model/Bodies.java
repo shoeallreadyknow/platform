@@ -26,34 +26,21 @@ public class Bodies {
                bodyDefinition.position.set(polylineObject.getPolyline().getX() * LevelController.UNIT_SCALE,polylineObject.getPolyline().getY() * LevelController.UNIT_SCALE);
 
                Body physicsbody = LevelController.gameWorld.createBody(bodyDefinition);
+
                ChainShape chainShape = new ChainShape();
+               float[] transformedVerticies = new float[polylineObject.getPolyline().getVertices().length];
+               for(int index = 0; index < transformedVerticies.length; index++){
+                   transformedVerticies[index] = polylineObject.getPolyline().getVertices()[index] * LevelController.UNIT_SCALE;
+               }
+               chainShape.createChain(transformedVerticies);
+
                FixtureDef fixtureDefinition = new FixtureDef();
                fixtureDefinition.shape = chainShape;
                fixtureDefinition.friction = 4.0f;
+
                physicsbody.createFixture(fixtureDefinition);
                chainShape.dispose();
            }
-           else if( bodyType.equalsIgnoreCase("slope")){
-               PolygonMapObject polygonobject = (PolygonMapObject)mapObject;
-                BodyDef bodyDefinition = new BodyDef();
-               bodyDefinition.type = BodyDef.BodyType.StaticBody;
-               bodyDefinition.position.set(polygonobject.getPolygon().getX()* LevelController.UNIT_SCALE, polygonobject.getPolygon().getY()* LevelController.UNIT_SCALE);
 
-               Body physicsbody = LevelController.gameWorld.createBody(bodyDefinition);
-               PolygonShape slopeshape = new PolygonShape();
-
-               float[] transformedVerticies = new float[6];
-
-               for(int index = 0; index < transformedVerticies.length; index++){
-                   transformedVerticies[index] = polygonobject.getPolygon().getVertices()[index] * LevelController.UNIT_SCALE;
-               }
-
-               slopeshape.set(transformedVerticies);
-               FixtureDef fixtureDefinition = new FixtureDef();
-               fixtureDefinition.shape = slopeshape;
-
-               physicsbody.createFixture(fixtureDefinition);
-               slopeshape.dispose();
-           }
      }
 }
