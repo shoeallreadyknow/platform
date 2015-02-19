@@ -31,9 +31,11 @@ public class InputController {
         return new InputAdapter(){
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                //makes go left
                 if(left.getBoundingBox().contains(screenX, Gdx.graphics.getHeight() - screenY)){
                     PlayerController.movementAction = "left";
                 }
+                //makes character go right
                else if(right.getBoundingBox().contains(screenX, Gdx.graphics.getHeight() - screenY)){
                     PlayerController.movementAction = "right";
                 }

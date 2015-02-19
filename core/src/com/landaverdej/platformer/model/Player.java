@@ -31,12 +31,25 @@ public class Player extends sprite {
         //geting the shape
         PolygonShape rectangleShape = new PolygonShape();
         rectangleShape.setAsBox(this.width /2, this.height /2, new Vector2(this.width/2f, this.height/ 2f), 0f );
+        //setting new sensor shape
+        PolygonShape sensorShape = new PolygonShape();
+        sensorShape.setAsBox(this.width/2.5f ,this.height/32, new Vector2(this.width/2, 0),0f);
+
         //setting the shsape to fix def
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
+
+        //seting sensor shape to fix def
+        FixtureDef fixtureDefinitionsensor = new FixtureDef();
+        fixtureDefinitionsensor.shape= sensorShape;
+        fixtureDefinitionsensor.isSensor = true;
+
         //created the fixture
         physicsbody.createFixture(fixtureDefinition);
+        //ceating the fixutre for sensorShape
+        physicsbody.createFixture(fixtureDefinitionsensor);
         rectangleShape.dispose();
+        sensorShape.dispose();
 
         animations.put("walk", spriteSheet.createAnimation(20, 21, 0.1f));
         animations.put("walkLeft", spriteSheet.flipAnimation(animations.get("walk"), true, false));

@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.landaverdej.platformer.model.Bodies;
+import com.landaverdej.platformer.model.CollisionListener;
 import com.landaverdej.platformer.model.InputControl;
 import com.landaverdej.platformer.model.Level;
 import com.landaverdej.platformer.model.Player;
@@ -36,6 +37,7 @@ public class LevelController {
         //set the renderer
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
         gameWorld = new World(new Vector2(0,-10), true);
+        gameWorld.setContactListener(new CollisionListener());
 
         worldbodies= new Array<Body>();
 
